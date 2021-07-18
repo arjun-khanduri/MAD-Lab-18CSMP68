@@ -57,11 +57,7 @@ class MainActivity : AppCompatActivity() {
         eval=findViewById(R.id.eval)
 
         fun pressButton(string: String){
-                expression.append(result.text)
-                expression.append(string)
-                result.text = ""
-
-
+            expression.append(string)
         }
 
         zero.setOnClickListener {
