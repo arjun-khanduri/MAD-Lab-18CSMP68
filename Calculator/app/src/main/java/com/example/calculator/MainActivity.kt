@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import net.objecthunter.exp4j.ExpressionBuilder
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,74 +56,67 @@ class MainActivity : AppCompatActivity() {
         dec=findViewById(R.id.dec)
         eval=findViewById(R.id.eval)
 
-        fun pressButton(string: String, clear: Boolean){
-
-            if(clear){
-                result.text = ""
-                expression.append(string)
-
-            }
-            else{
+        fun pressButton(string: String){
                 expression.append(result.text)
                 expression.append(string)
                 result.text = ""
-            }
+
 
         }
 
         zero.setOnClickListener {
-            pressButton("0", true)
+            pressButton("0")
         }
         one.setOnClickListener {
-            pressButton("1", true)
+            pressButton("1")
         }
         two.setOnClickListener {
-            pressButton("2", true)
+            pressButton("2")
         }
         three.setOnClickListener {
-            pressButton("3", true)
+            pressButton("3")
         }
 
         four.setOnClickListener {
-            pressButton("4", true)
+            pressButton("4")
         }
 
         five.setOnClickListener {
-            pressButton("5", true)
+            pressButton("5")
         }
 
         six.setOnClickListener {
-            pressButton("6", true)
+            pressButton("6")
         }
 
         seven.setOnClickListener {
-            pressButton("7", true)
+            pressButton("7")
         }
 
         eight.setOnClickListener {
-            pressButton("8", true)
+            pressButton("8")
         }
 
         nine.setOnClickListener {
-            pressButton("9", true)
+            pressButton("9")
         }
 
         dec.setOnClickListener {
-            pressButton(".", true)
+            pressButton(".")
         }
 
         div.setOnClickListener {
-            pressButton("/", true)
+            pressButton("/")
         }
 
         mul.setOnClickListener {
-            pressButton("*", true)
+            pressButton("*")
         }
         add.setOnClickListener {
-            pressButton("+", true)
+            pressButton("+")
         }
         sub.setOnClickListener {
-            pressButton("-", true)
+            pressButton("-")
         }
 
         b1.setOnClickListener{
@@ -131,18 +126,18 @@ class MainActivity : AppCompatActivity() {
 
         eval.setOnClickListener {
             val text = expression.text.toString()
-            val expression = ExpressionBuilder(text).build()
-            val expResult = expression.evaluate()
-            val longResult = expResult.toLong()
-            if(expResult == longResult.toDouble())
-                result.text= longResult.toString()
-            else
-                result.text = expResult.toString()
+            try {
+                val expression = ExpressionBuilder(text).build()
+                val expResult = expression.evaluate()
+                val longResult = expResult.toLong()
+                if(expResult == longResult.toDouble())
+                    result.text= longResult.toString()
+                else
+                    result.text = expResult.toString()
+            }
+            catch (e: Exception){
+                Toast.makeText(baseContext,"Invalid expression",Toast.LENGTH_SHORT).show()
+            }
         }
-
-
-
-
-
     }
 }
